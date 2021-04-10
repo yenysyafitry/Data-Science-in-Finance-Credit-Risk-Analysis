@@ -124,8 +124,8 @@ summary(risk_rating_model)</summary>
 <p align="justify"><b>Algoritma C5.0 </b>adalah algoritma machine learning yang digunakan untuk membentuk model pohon keputusan (decision tree) secara otomatis, dan cocok untuk memodelkan dan sebagi alat prediksi credit rating.
 <ol>Karena algoritma ini masuk ke dalam kategori classification, variable yang diperlukan oleh algoritma ini ada dua macam:
 <li>Class variable, yaitu variable yang berisi nilai yang ingin kita klasifikasikan. Variable ini harus berisi tipe factor.</li>
-<li>Input variables, yaitu variable-variable yang berisi nilai input.</li><ol>
-Dan untuk mengukur akurasi dari model yang kita hasilkan, kita sebaiknya membagi dataset yang ada menjadi dua porsi secara random:
+<li>Input variables, yaitu variable-variable yang berisi nilai input.</li></ol>
+<ol>Dan untuk mengukur akurasi dari model yang kita hasilkan, kita sebaiknya membagi dataset yang ada menjadi dua porsi secara random:
 <li>Training set, yang digunakan untuk memberikan input ke algoritma untuk membentuk model.</li>
 <li>Testing set, yang akan digunakan untuk data pembanding untuk mengukur akurasi algoritma.</li></ol>
 Setelah semua persiapan dataset ini selesai, pada penutup bab dataset ini kita menggunakan fungsi C5.0 untuk membentuk model risk rating. Dan untuk mencetak hasil yang bisa dibaca atas model ini, kita gunakan fungsi  summary. Sedangkan untuk menghasilkan diagram decision tree kita gunakan perintah plot. Semua function ini dari package C50.</p>
