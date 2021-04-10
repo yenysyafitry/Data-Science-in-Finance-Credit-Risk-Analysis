@@ -47,9 +47,9 @@ str(dataCreditRating)</br>
 #Melakukan konversi kolom risk_rating menjadi factor</br>
 dataCreditRating$risk_rating <- as.factor(dataCreditRating$risk_rating) </br>
 #Melihat struktur setelah konversi</br>
-str(dataCreditRating)</summary> </br>
+str(dataCreditRating)</summary> 
   <table border="0"><tr><td>> library("openxlsx") </br>
-> #Mempersiapkan data </br>
+> #Mempersiapkan data </br>> dataCreditRating <- read.xlsx(xlsxFile = "https://github.com/yenysyafitry/Data-Science-in-Finance-Credit-Risk-Analysis")
 </td></tr></table>
 </details>
 </p>
