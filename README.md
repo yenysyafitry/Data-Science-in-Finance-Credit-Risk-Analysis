@@ -53,3 +53,18 @@ str(dataCreditRating)</summary>
 </td></tr></table>
 </details>
 </p>
+<p>Data Preparation untuk Input Variables</p><details>
+  <summary>library("openxlsx")</br>
+#Mempersiapkan data</br>
+dataCreditRating <- read.xlsx(xlsxFile = "https://github.com/yenysyafitry/Data-Science-in-Finance-Credit-Risk-Analysis")</br>
+#Merubah tipe data class variable sebagai factor </br>
+dataCreditRating$risk_rating <- as.factor(dataCreditRating$risk_rating) </br>
+str(dataCreditRating)</br>
+#Menghilangkan beberapa variable input dari dataset </br>
+input_columns <- c("durasi_pinjaman_bulan", "jumlah_tanggungan")</br>
+datafeed <- dataCreditRating[ , input_columns ]</summary></br>
+  <table border="0"><tr><td>> library("openxlsx")</br>
+> #Mempersiapkan data</br>
+> dataCreditRating <- read.xlsx(xlsxFile = "https://github.com/yenysyafitry/Data-Science-in-Finance-Credit-Risk-Analysis")</br>
+</td></tr></table>
+</details>
