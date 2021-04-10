@@ -19,7 +19,6 @@ Nah, tiga aturan itu kita sebut sebagai model untuk memprediksi nilai risk ratin
 Dengan model ini, lembaga pinjaman akan semakin cepat mengambil keputusan dan dengan tingkat kesalahan pengambilan keputusan yang lebih minim.</p>
 
 <p align="justify"><b>Contoh Pemodelan Decision Tree dengan Machine Learning</b></p>
-
 <details>
   <summary>library("openxlsx")</br>
 library("C50")</br>
@@ -38,3 +37,19 @@ summary(modelKu)
 > dataCreditRating <- read.xlsx(xlsxFile = "https://github.com/yenysyafitry/Data-Science-in-Finance-Credit-Risk-Analysis")</br>
 </td></tr></table>
 </details>
+
+<p align="justify"><b>Data Preparation untuk Class Variable</b>
+ <details>
+  <summary>library("openxlsx")</br>
+#Mempersiapkan data</br>
+dataCreditRating <- read.xlsx(xlsxFile = "https://github.com/yenysyafitry/Data-Science-in-Finance-Credit-Risk-Analysis")</br>
+str(dataCreditRating)</br>
+#Melakukan konversi kolom risk_rating menjadi factor</br>
+dataCreditRating$risk_rating <- as.factor(dataCreditRating$risk_rating) </br>
+#Melihat struktur setelah konversi</br>
+str(dataCreditRating)</summary> </br>
+  <table border="0"><tr><td>> library("openxlsx") </br>
+> #Mempersiapkan data </br>
+</td></tr></table>
+</details>
+</p>
