@@ -235,6 +235,131 @@ predict(risk_rating_model, input_testing_set)</summary>
   <table border="0"><tr><td>> predict(risk_rating_model, input_testing_set)</br>
   [1] 1 3 4 1 5 4 4 2 1 3 3 1 3 3 3 4 3 1 1 3 5 3 5 1 4 4 1 3 3 1 2 3 3 1 3 5 3</br>
  [38] 3 3 1 3 3 5 1 5 1 5 1 3 3 4 1 3 1 1 3 1 1 1 5 1 1 3 3 3 1 3 4 1 3 3 3 1 3</br>
- [75] 4 3 2 1 3 1 5 5 1 1 4 4 3 2 4 1 1 4 1 3 1 1 1 5 4 3
+ [75] 4 3 2 1 3 1 5 5 1 1 4 4 3 2 4 1 1 4 1 3 1 1 1 5 4 3</br>
 Levels: 1 2 3 4 5</td></tr></table>
+</details>
+<details>
+ <summary><b>Menggabungkan Hasil Prediksi</b></br>library("openxlsx")</br>
+library("C50")</br>
+#Mempersiapkan data</br>
+dataCreditRating <- read.xlsx(xlsxFile = "https://github.com/yenysyafitry/Data-Science-in-Finance-Credit-Risk-Analysis")</br>
+#Mempersiapkan class dan input variables</br>
+dataCreditRating$risk_rating <- as.factor(dataCreditRating$risk_rating)</br>
+input_columns <- c("durasi_pinjaman_bulan", "jumlah_tanggungan")</br>
+datafeed <- dataCreditRating[ , input_columns ]</br>
+#Mempersiapkan training dan testing set</br>
+set.seed(100) #untuk menyeragamkan hasil random antar tiap komputer</br>
+indeks_training_set <- sample(900, 800)</br>
+#Membuat dan menampilkan training set dan testing set</br>
+input_training_set <- datafeed[indeks_training_set,]</br>
+class_training_set <- dataCreditRating[indeks_training_set,]$risk_rating</br>
+input_testing_set <- datafeed[-indeks_training_set,]</br>
+#menghasilkan model</br>
+risk_rating_model <- C5.0(input_training_set, class_training_set, control = C5.0Control(label="Risk Rating"))</br>
+#menyimpan risk_rating dari data awal dan hasil prediksi testing set ke dalam kolom hasil_prediksi</br>
+input_testing_set$risk_rating <- dataCreditRating[-indeks_training_set,]$risk_rating</br>
+input_testing_set$hasil_prediksi <- predict(risk_rating_model, input_testing_set)</br>
+#menampilkan variable input_testing_set</br>
+print(input_testing_set)</summary>
+  <table border="0"><tr><td>durasi_pinjaman_bulan jumlah_tanggungan risk_rating hasil_prediksi</br>
+3                      12                 0           1              1</br>
+8                      48                 3           2              3</br>
+21                     24                 5           2              4</br>
+26                     12                 0           1              1</br>
+28                     36                 5           2              5</br>
+37                     24                 5           2              4</br>
+39                     24                 5           1              4</br>
+45                     48                 0           1              2</br>
+49                     36                 2           1              1</br>
+53                     12                 4           2              3</br>
+54                     48                 1           2              3</br>
+58                     12                 0           1              1</br>
+60                     48                 3           2              3</br>
+61                     48                 2           2              3</br>
+62                     24                 4           2              3</br>
+65                     24                 5           2              4</br>
+75                     24                 3           2              3</br>
+97                     12                 0           1              1</br>
+112                    12                 0           1              1</br>
+117                    24                 3           3              3</br>
+123                    36                 6           4              5</br>
+125                    36                 4           3              3</br>
+128                    36                 6           4              5</br>
+162                    12                 0           1              1</br>
+166                    24                 6           4              4</br>
+187                    12                 6           5              4</br>
+192                    36                 1           1              1</br>
+198                    12                 3           3              3</br>
+219                    48                 2           3              3</br>
+221                    36                 1           1              1</br>
+239                    48                 0           2              2</br>
+250                    24                 4           3              3</br>
+255                    48                 1           3              3</br>
+276                    36                 1           1              1</br>
+284                    24                 4           3              3</br>
+287                    36                 6           5              5</br>
+291                    24                 4           3              3</br>
+323                    48                 4           3              3</br>
+329                    48                 1           3              3</br>
+335                    24                 0           1              1</br>
+336                    48                 2           3              3</br>
+338                    36                 3           3              3</br>
+345                    36                 5           4              5</br>
+348                    24                 0           1              1</br>
+350                    48                 6           5              5</br>
+356                    36                 2           2              1</br>
+386                    48                 5           4              5</br>
+398                    12                 1           1              1</br>
+406                    36                 4           3              3</br>
+416                    24                 3           3              3</br>
+434                    12                 6           4              4</br>
+460                    12                 1           1              1</br>
+466                    48                 1           3              3</br>
+514                    36                 2           1              1</br>
+520                    24                 1           2              1</br>
+526                    24                 3           3              3</br>
+532                    36                 1           1              1</br>
+539                    36                 2           2              1</br>
+541                    24                 1           1              1</br>
+548                    48                 6           5              5</br>
+560                    24                 1           1              1</br>
+564                    24                 1           1              1</br>
+568                    48                 3           3              3</br>
+570                    48                 4           3              3</br>
+572                    24                 4           3              3</br>
+584                    36                 2           1              1</br>
+585                    36                 4           3              3</br>
+587                    12                 6           4              4</br>
+588                    12                 2           1              1</br>
+646                    48                 1           3              3</br>
+660                    36                 4           3              3</br>
+665                    12                 4           3              3</br>
+666                    36                 0           2              1</br>
+673                    48                 3           3              3</br>
+677                    24                 5           4              4</br>
+678                    48                 4           3              3</br>
+679                    48                 0           2              2</br>
+681                    36                 1           1              1</br>
+684                    48                 2           3              3</br>
+687                    12                 2           1              1</br>
+701                    48                 5           4              5</br>
+704                    48                 6           5              5</br>
+707                    12                 2           1              1</br>
+708                    12                 2           1              1</br>
+716                    12                 5           4              4</br>
+732                    24                 6           4              4</br>
+734                    24                 3           3              3</br>
+767                    48                 0           2              2</br>
+776                    12                 6           4              4</br>
+781                    24                 2           1              1</br>
+782                    24                 2           1              1</br>
+790                    12                 6           4              4</br>
+813                    24                 2           1              1</br>
+839                    24                 4           3              3</br>
+842                    36                 0           2              1</br>
+845                    24                 2           2              1</br>
+853                    24                 2           1              1</br>
+861                    48                 5           5              5</br>
+862                    12                 6           4              4</br>
+870                    48                 3           3              3</td></tr></table>
 </details>
