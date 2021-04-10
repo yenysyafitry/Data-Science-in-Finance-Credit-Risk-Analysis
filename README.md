@@ -363,3 +363,155 @@ print(input_testing_set)</summary>
 862                    12                 6           4              4</br>
 870                    48                 3           3              3</td></tr></table>
 </details>
+
+<details>
+ <summary><b>Membuat Table Confusion Matrix</b></br>library("openxlsx")</br>
+library("C50")</br>
+library("reshape2")</br>
+#Mempersiapkan data</br>
+dataCreditRating <- read.xlsx(xlsxFile = "https://github.com/yenysyafitry/Data-Science-in-Finance-Credit-Risk-Analysis")</br>
+#Mempersiapkan class dan input variables </br>
+dataCreditRating$risk_rating <- as.factor(dataCreditRating$risk_rating) </br>
+input_columns <- c("durasi_pinjaman_bulan", "jumlah_tanggungan")</br>
+datafeed <- dataCreditRating[ , input_columns ]</br>
+#Mempersiapkan training dan testing set</br>
+set.seed(100) #untuk menyeragamkan hasil random antar tiap komputer</br>
+indeks_training_set <- sample(900, 800)</br>
+#Membuat dan menampilkan training set dan testing set</br>
+input_training_set <- datafeed[indeks_training_set,]</br>
+class_training_set <- dataCreditRating[indeks_training_set,]$risk_rating</br>
+input_testing_set <- datafeed[-indeks_training_set,]</br>
+#menghasilkan model</br>
+risk_rating_model <- C5.0(input_training_set, class_training_set, control = C5.0Control(label="Risk Rating"))</br>
+#menyimpan risk_rating dari data awal dan hasil prediksi testing set ke dalam kolom hasil_prediksi</br>
+input_testing_set$risk_rating <- dataCreditRating[-indeks_training_set,]$risk_rating</br>
+input_testing_set$hasil_prediksi <- predict(risk_rating_model, input_testing_set)</br>
+#membuat confusion matrix</br>
+dcast(hasil_prediksi ~ risk_rating, data=input_testing_set)</summary>
+  <table border="0"><tr><td> hasil_prediksi  1 2  3 4 5</br>
+1              1 29 6  0 0 0</br>
+2              2  1 3  0 0 0</br>
+3              3  0 7 29 0 0</br>
+4              4  1 3  0 9 1</br>
+5              5  0 1  0 5 5</td></tr></table></details>
+
+<details>
+ <summary><b>Jumlah Data dengan Prediksi Benar</b></br>library("openxlsx")</br>
+library("C50")</br>
+#Mempersiapkan data</br>
+dataCreditRating <- read.xlsx(xlsxFile = "https://github.com/yenysyafitry/Data-Science-in-Finance-Credit-Risk-Analysis")</br>
+#Mempersiapkan class dan input variables</br>
+dataCreditRating$risk_rating <- as.factor(dataCreditRating$risk_rating)</br>
+input_columns <- c("durasi_pinjaman_bulan", "jumlah_tanggungan")</br>
+datafeed <- dataCreditRating[ , input_columns ]</br>
+#Mempersiapkan training dan testing set</br>
+set.seed(100) #untuk menyeragamkan hasil random antar tiap komputer</br>
+indeks_training_set <- sample(900, 800)</br>
+#Membuat dan menampilkan training set dan testing set</br>
+input_training_set <- datafeed[indeks_training_set,]</br>
+class_training_set <- dataCreditRating[indeks_training_set,]$risk_rating</br>
+input_testing_set <- datafeed[-indeks_training_set,]</br>
+#menghasilkan model</br>
+risk_rating_model <- C5.0(input_training_set, class_training_set, control = C5.0Control(label="Risk Rating"))</br>
+#menyimpan risk_rating dari data awal dan hasil prediksi testing set ke dalam kolom hasil_prediksi</br>
+input_testing_set$risk_rating <- dataCreditRating[-indeks_training_set,]$risk_rating</br>
+input_testing_set$hasil_prediksi <- predict(risk_rating_model, input_testing_set)</br>
+#Menghitung jumlah prediksi yang benar</br>
+nrow(input_testing_set[input_testing_set$risk_rating==input_testing_set$hasil_prediksi,])</summary>
+  <table border="0"><tr><td>   hasil_prediksi  1 2  3 4 5</br>
+1               1 29 6  0 0 0</br>
+2               2  1 3  0 0 0</br>
+3               3  0 7 29 0 0</br>
+4               4  1 3  0 9 1</br>
+5               5  0 1  0 5 5</td></tr></table>
+</details>
+<details>
+ <summary><b>Jumlah Data dengan Prediksi Salah</b></br>library("openxlsx")</br>
+library("C50")</br>
+#Mempersiapkan data</br>
+dataCreditRating <- read.xlsx(xlsxFile = "https://github.com/yenysyafitry/Data-Science-in-Finance-Credit-Risk-Analysis")</br>
+#Mempersiapkan class dan input variables </br>
+dataCreditRating$risk_rating <- as.factor(dataCreditRating$risk_rating) </br>
+input_columns <- c("durasi_pinjaman_bulan", "jumlah_tanggungan")</br>
+datafeed <- dataCreditRating[ , input_columns ]</br>
+#Mempersiapkan training dan testing set</br>
+set.seed(100) #untuk menyeragamkan hasil random antar tiap komputer</br>
+indeks_training_set <- sample(900, 800)</br>
+#Membuat dan menampilkan training set dan testing set</br>
+input_training_set <- datafeed[indeks_training_set,]</br>
+class_training_set <- dataCreditRating[indeks_training_set,]$risk_rating</br>
+input_testing_set <- datafeed[-indeks_training_set,]</br>
+#menghasilkan model</br>
+risk_rating_model <- C5.0(input_training_set, class_training_set, control = C5.0Control(label="Risk Rating"))</br>
+#menyimpan risk_rating dari data awal dan hasil prediksi testing set ke dalam kolom hasil_prediksi</br>
+input_testing_set$risk_rating <- dataCreditRating[-indeks_training_set,]$risk_rating</br>
+input_testing_set$hasil_prediksi <- predict(risk_rating_model, input_testing_set)</br>
+#Menghitung jumlah prediksi yang salah</br>
+nrow(input_testing_set[input_testing_set$risk_rating!=input_testing_set$hasil_prediksi,])</summary>
+  <table border="0"><tr><td>> library("openxlsx")</br>
+> library("C50")</br>
+> #Mempersiapkan data</br>
+> dataCreditRating <- read.xlsx(xlsxFile = "https://github.com/yenysyafitry/Data-Science-in-Finance-Credit-Risk-Analysis")</br>
+</td></tr></table>
+</details>
+<details>
+ <summary><b>Mempersiapkan Data Pengajuan Baru</b></br>#Membuat data frame aplikasi baru</br>
+aplikasi_baru <- data.frame(jumlah_tanggungan = 6, durasi_pinjaman_bulan = 12)</br>
+Print(aplikasi_baru)</summary>
+  <table border="0"><tr><td> jumlah_tanggungan durasi_pinjaman_bulan</br>
+1                 6                    12</td></tr></table>
+</details>
+
+<details>
+ <summary><b>Melakukan Prediksi terhadap Data Pengajuan Baru</b></br>library("openxlsx")</br>
+library("C50")</br>
+dataCreditRating <- read.xlsx(xlsxFile = "https://github.com/yenysyafitry/Data-Science-in-Finance-Credit-Risk-Analysis")</br>
+dataCreditRating$risk_rating <- as.factor(dataCreditRating$risk_rating)</br>
+input_columns <- c("durasi_pinjaman_bulan", "jumlah_tanggungan")</br>
+datafeed <- dataCreditRating[ , input_columns ]</br>
+set.seed(100)</br>
+indeks_training_set <- sample(900, 800)</br>
+input_training_set <- datafeed[indeks_training_set,]</br>
+class_training_set <- dataCreditRating[indeks_training_set,]$risk_rating</br>
+input_testing_set <- datafeed[-indeks_training_set,]</br>
+risk_rating_model <- C5.0(input_training_set, class_training_set)</br>
+aplikasi_baru <- data.frame(jumlah_tanggungan = 6, durasi_pinjaman_bulan = 12)</br>
+predict(risk_rating_model, aplikasi_baru)</summary>
+  <table border="0"><tr><td>[1] 4</br>
+Levels: 1 2 3 4 5</td></tr></table>
+</details>
+
+<details>
+ <summary><b>Merubah Durasi Pinjaman</b></br>library("openxlsx")</br>
+library("C50")</br>
+#Mempersiapkan data</br>
+dataCreditRating <- read.xlsx(xlsxFile = "https://academy.dqlab.id/dataset/credit_scoring_dqlab.xlsx")</br>
+#Mempersiapkan class dan input variables</br>
+dataCreditRating$risk_rating <- as.factor(dataCreditRating$risk_rating)</br>
+input_columns <- c("durasi_pinjaman_bulan", "jumlah_tanggungan")</br>
+datafeed <- dataCreditRating[ , input_columns ]</br>
+#Mempersiapkan training dan testing set</br>
+set.seed(100) #untuk menyeragamkan hasil random antar tiap komputer</br>
+indeks_training_set <- sample(900, 800)</br>
+#Membuat dan menampilkan training set dan testing set</br>
+input_training_set <- datafeed[indeks_training_set,]</br>
+class_training_set <- dataCreditRating[indeks_training_set,]$risk_rating</br>
+input_testing_set <- datafeed[-indeks_training_set,]</br>
+#menghasilkan dan menampilkan summary model</br>
+risk_rating_model <- C5.0(input_training_set, class_training_set)</br>
+#Membuat data frame aplikasi baru</br>
+aplikasi_baru <- data.frame(jumlah_tanggungan = 6, durasi_pinjaman_bulan = 64)</br>
+#melakukan prediksi</br>
+predict(risk_rating_model, aplikasi_baru)</summary>
+  <table border="0"><tr><td>[1] 5</br>
+Levels: 1 2 3 4 5</td></tr></table>
+</details>
+
+<ol>Terkait hal tersebut, sepanjang bab ini Anda telah menempuh perjalanan sebagai seorang data scientist yang menerapkan solusi tersebut:
+<li>Mengerti apa itu decision tree dan algoritma C5.0.</li>
+<li>Melakukan data preparation untuk class variable dan input variable.</li>
+<li>Melakukan data preparation untuk training dan testing set.</li>
+<li>Menggunakan training set untuk menghasilkan model credit risk menggunakan algoritma C5.0.</li>
+<li>Mengevaluasi akurasi decision credit risk.</li>
+<li>Menggunakan model tersebut untuk memprediksi risk rating data pengajuan baru.</li></ol>
+
