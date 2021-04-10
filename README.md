@@ -62,9 +62,14 @@ dataCreditRating$risk_rating <- as.factor(dataCreditRating$risk_rating) </br>
 str(dataCreditRating)</br>
 #Menghilangkan beberapa variable input dari dataset </br>
 input_columns <- c("durasi_pinjaman_bulan", "jumlah_tanggungan")</br>
-datafeed <- dataCreditRating[ , input_columns ]</summary></br>
+datafeed <- dataCreditRating[ , input_columns ]</summary>
   <table border="0"><tr><td>> library("openxlsx")</br>
 > #Mempersiapkan data</br>
 > dataCreditRating <- read.xlsx(xlsxFile = "https://github.com/yenysyafitry/Data-Science-in-Finance-Credit-Risk-Analysis")</br>
 </td></tr></table>
 </details>
+<p align="justify"><b>Training Set dan Testing Set</b>
+<ol>Untuk proses pembentukan model machine learning dan melihat akurasinya, biasanya dataset kita perlu dibagi menjadi dua, yaitu:
+<li>Training set: adalah porsi dataset yang digunakan oleh algoritma untuk dianalisa dan menjadi input untuk pembentukan model. </li>
+<li>Testing set: adalah porsi dataset yang tidak digunakan untuk membentuk model, tapi untuk menguji model yang telah dibentuk.</li></ol>
+Pembentukan ini biasanya menggunakan metode pemilihan acak. Untuk praktek selanjutnya, kita akan membagi dataset kita menjadi 800 baris data untuk training set dan 100 baris data untuk testing set.<p>
