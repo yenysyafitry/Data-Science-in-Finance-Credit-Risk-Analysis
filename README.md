@@ -129,3 +129,29 @@ summary(risk_rating_model)</summary>
 <li>Training set, yang digunakan untuk memberikan input ke algoritma untuk membentuk model.</li>
 <li>Testing set, yang akan digunakan untuk data pembanding untuk mengukur akurasi algoritma.</li></ol>
 Setelah semua persiapan dataset ini selesai, pada penutup bab dataset ini kita menggunakan fungsi C5.0 untuk membentuk model risk rating. Dan untuk mencetak hasil yang bisa dibaca atas model ini, kita gunakan fungsi  summary. Sedangkan untuk menghasilkan diagram decision tree kita gunakan perintah plot. Semua function ini dari package C50.</p>
+<details>
+ <summary><b>Label dari Class</b></br>library("openxlsx")
+library("C50")</br>
+#Mempersiapkan data</br>
+dataCreditRating <- read.xlsx(xlsxFile = "https://github.com/yenysyafitry/Data-Science-in-Finance-Credit-Risk-Analysis")</br>
+#Mempersiapkan class dan input variables </br>
+dataCreditRating$risk_rating <- as.factor(dataCreditRating$risk_rating) </br>
+input_columns <- c("durasi_pinjaman_bulan", "jumlah_tanggungan")</br>
+datafeed <- dataCreditRating[ , input_columns ]</br>
+#Mempersiapkan training dan testing set</br>
+set.seed(100) #untuk menyeragamkan hasil random antar tiap komputer</br>
+indeks_training_set <- sample(900, 800)</br>
+#Membuat dan menampilkan training set dan testing set</br>
+input_training_set <- datafeed[indeks_training_set,]</br>
+class_training_set <- dataCreditRating[indeks_training_set,]$risk_rating</br>
+input_testing_set <- datafeed[-indeks_training_set,]</br>
+#menghasilkan model</br>
+risk_rating_model <- C5.0(input_training_set, class_training_set, control = C5.0Control(label="Risk Rating"))</br>
+summary(risk_rating_model)
+</summary>
+  <table border="0"><tr><td>> library("openxlsx")</br>
+> library("C50")</br>
+> #Mempersiapkan data</br>
+> dataCreditRating <- read.xlsx(xlsxFile = "https://github.com/yenysyafitry/Data-Science-in-Finance-Credit-Risk-Analysis")</br>
+</td></tr></table>
+</details>
