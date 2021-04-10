@@ -96,3 +96,28 @@ str(input_testing_set)</summary>
 > dataCreditRating <- read.xlsx(xlsxFile = "https://github.com/yenysyafitry/Data-Science-in-Finance-Credit-Risk-Analysis")
 </td></tr></table>
 </details>
+<details>
+ <summary><b>Menghasilkan Model dengan Fungsi C5.0</b></br>library("openxlsx")</br>
+library("C50")</br>
+#Mempersiapkan data</br>
+dataCreditRating <- read.xlsx(xlsxFile = "https://github.com/yenysyafitry/Data-Science-in-Finance-Credit-Risk-Analysis")</br>
+#Mempersiapkan class dan input variables</br>
+dataCreditRating$risk_rating <- as.factor(dataCreditRating$risk_rating)</br>
+input_columns <- c("durasi_pinjaman_bulan", "jumlah_tanggungan")</br>
+datafeed <- dataCreditRating[ , input_columns ]</br>
+#Mempersiapkan training dan testing set</br>
+set.seed(100) #untuk menyeragamkan hasil random antar tiap komputer</br>
+indeks_training_set <- sample(900, 800)</br>
+#Membuat dan menampilkan training set dan testing set</br>
+input_training_set <- datafeed[indeks_training_set,]</br>
+class_training_set <- dataCreditRating[indeks_training_set,]$risk_rating</br>
+input_testing_set <- datafeed[-indeks_training_set,]</br>
+#menghasilkan dan menampilkan summary model</br>
+risk_rating_model <- C5.0(input_training_set, class_training_set)</br>
+summary(risk_rating_model)</summary>
+  <table border="0"><tr><td>> library("openxlsx")</br>
+> library("C50")</br>
+> #Mempersiapkan data</br>
+> dataCreditRating <- read.xlsx(xlsxFile = "https://github.com/yenysyafitry/Data-Science-in-Finance-Credit-Risk-Analysis")
+</td></tr></table>
+</details>
