@@ -73,3 +73,26 @@ datafeed <- dataCreditRating[ , input_columns ]</summary>
 <li>Training set: adalah porsi dataset yang digunakan oleh algoritma untuk dianalisa dan menjadi input untuk pembentukan model. </li>
 <li>Testing set: adalah porsi dataset yang tidak digunakan untuk membentuk model, tapi untuk menguji model yang telah dibentuk.</li></ol>
 Pembentukan ini biasanya menggunakan metode pemilihan acak. Untuk praktek selanjutnya, kita akan membagi dataset kita menjadi 800 baris data untuk training set dan 100 baris data untuk testing set.<p>
+ <details>
+  <summary><b>Mempersiapkan Training dan Testing Set</b></br>library("openxlsx")</br>
+#Mempersiapkan data</br>
+dataCreditRating <- read.xlsx(xlsxFile = "https://github.com/yenysyafitry/Data-Science-in-Finance-Credit-Risk-Analysis")</br>
+#Mempersiapkan class dan input variables</br>
+dataCreditRating$risk_rating <- as.factor(dataCreditRating$risk_rating)</br>
+input_columns <- c("durasi_pinjaman_bulan", "jumlah_tanggungan")</br>
+datafeed <- dataCreditRating[ , input_columns ]</br>
+#Mempersiapkan training dan testing set</br>
+set.seed(100) #untuk menyeragamkan hasil random antar tiap komputer</br>
+indeks_training_set <- sample(900, 800)</br>
+#Membuat dan menampilkan training set dan testing set</br>
+input_training_set <- datafeed[indeks_training_set,]</br>
+class_training_set <- dataCreditRating[indeks_training_set,]$risk_rating</br>
+input_testing_set <- datafeed[-indeks_training_set,]</br>
+str(input_training_set)</br>
+str(class_training_set)</br>
+str(input_testing_set)</summary>
+  <table border="0"><tr><td>> library("openxlsx")</br>
+> # Mempersiapkan data</br>
+> dataCreditRating <- read.xlsx(xlsxFile = "https://github.com/yenysyafitry/Data-Science-in-Finance-Credit-Risk-Analysis")
+</td></tr></table>
+</details>
